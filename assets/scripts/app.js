@@ -3,7 +3,8 @@ let currentResult = defaultResult;
 let logEntries = [];
 
 //To get number from input field
-function getUserInputOutput() {
+function getUserInput() {
+  console.log("TEST COMMIT")
   return parseInt(userInput.value);
 }
 
