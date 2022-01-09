@@ -4,7 +4,6 @@ let logEntries = [];
 
 //To get number from input field
 function getUserInput() {
-  console.log("Test DS ")
   return parseInt(userInput.value);
 }
 
@@ -13,20 +12,28 @@ function writeResult(operator, nbumberBeforeCal, calNumber) {
   outputResult(currentResult, calDiscription); // from vendor.js
 }
 
+function writeLog(
+  operatorIdentifier,
+  previousResult,
+  enteredNumber,
+  finalResult
+) {
+  const logEntry = {
+    operator: operatorIdentifier,
+    userInput: enteredNumber,
+    previousResult: previousResult,
+    result: finalResult,
+  };
+  logEntries.push(logEntry);
+  console.log(logEntries);
+}
+
 function add() {
   const enteredNumber = getUserInput();
   const nbumberBeforeCal = currentResult;
   currentResult += enteredNumber;
   writeResult("+", nbumberBeforeCal, enteredNumber);
-  const logEntry = {
-    operator: "ADD",
-    userInput: enteredNumber,
-    previousResult: nbumberBeforeCal,
-    result: currentResult,
-  };
-  logEntries.push(logEntry);
-  console.log(logEntry.operator);
-  console.log(logEntries);
+  writeLog('ADD',nbumberBeforeCal, enteredNumber,  currentResult);
 }
 
 function subtract() {
@@ -34,6 +41,7 @@ function subtract() {
   const nbumberBeforeCal = currentResult;
   currentResult -= enteredNumber;
   writeResult("-", nbumberBeforeCal, enteredNumber);
+  writeLog('SUBTRACT',nbumberBeforeCal, enteredNumber, currentResult);
 }
 
 function multiple() {
@@ -41,6 +49,7 @@ function multiple() {
   const nbumberBeforeCal = currentResult;
   currentResult *= enteredNumber;
   writeResult("*", nbumberBeforeCal, enteredNumber);
+  writeLog('MULTIPLY',nbumberBeforeCal, enteredNumber,  currentResult);
 }
 
 function divide() {
@@ -48,6 +57,7 @@ function divide() {
   const nbumberBeforeCal = currentResult;
   currentResult /= enteredNumber;
   writeResult("/", nbumberBeforeCal, enteredNumber);
+  writeLog('DIVIDE',nbumberBeforeCal, enteredNumber,  currentResult);
 }
 
 addBtn.addEventListener("click", add);
