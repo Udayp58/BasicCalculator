@@ -3,7 +3,7 @@ let currentResult = defaultResult;
 let logEntries = [];
 
 //To get number from input field
-function getUserInput() {
+function getUserInputOutput() {
   return parseInt(userInput.value);
 }
 
