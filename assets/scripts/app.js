@@ -4,7 +4,6 @@ let logEntries = [];
 
 //To get number from input field
 function getUserInput() {
-  console.log("Test DS ")
   return parseInt(userInput.value);
 }
 
