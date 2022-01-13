@@ -7,6 +7,36 @@ function getUserInput() {
   return parseInt(userInput.value);
 }
 
+function calculateResult(calculationType) {
+  const enteredNumber = getUserInput();
+  if (
+    calculationType !== "ADD" &&
+    calculationType !== "SUBTRACT" &&
+    calculationType !== "MULTIPLY" &&
+    calculationType !==  "DIVIDE" ||
+    !enteredNumber
+  ){
+    return;
+  }
+  const nbumberBeforeCal = currentResult;
+  let methodOfOperator;
+  if (calculationType === "ADD") {
+    currentResult += enteredNumber;
+    methodOfOperator = "+";
+  } else if (calculationType === "SUBTRACT") {
+    currentResult -= enteredNumber;
+    methodOfOperator = "-";
+  } else if (calculationType === "MULTIPLY") {
+    currentResult *= enteredNumber;
+    methodOfOperator = "*";
+  } else if (calculationType === "DIVIDE") {
+    currentResult /= enteredNumber;
+    methodOfOperator = "/";
+  }
+  writeResult(methodOfOperator, nbumberBeforeCal, enteredNumber);
+  writeLog(calculationType, nbumberBeforeCal, enteredNumber, currentResult);
+}
+
 function writeResult(operator, nbumberBeforeCal, calNumber) {
   const calDiscription = `${nbumberBeforeCal} ${operator} ${calNumber}`;
   outputResult(currentResult, calDiscription); // from vendor.js
@@ -29,38 +59,22 @@ function writeLog(
 }
 
 function add() {
-  const enteredNumber = getUserInput();
-  const nbumberBeforeCal = currentResult;
-  currentResult += enteredNumber;
-  writeResult("+", nbumberBeforeCal, enteredNumber);
-  writeLog('ADD',nbumberBeforeCal, enteredNumber,  currentResult);
+  calculateResult("ADD");
 }
 
 function subtract() {
-  const enteredNumber = getUserInput();
-  const nbumberBeforeCal = currentResult;
-  currentResult -= enteredNumber;
-  writeResult("-", nbumberBeforeCal, enteredNumber);
-  writeLog('SUBTRACT',nbumberBeforeCal, enteredNumber, currentResult);
+  calculateResult("SUBTRACT");
 }
 
-function multiple() {
-  const enteredNumber = getUserInput();
-  const nbumberBeforeCal = currentResult;
-  currentResult *= enteredNumber;
-  writeResult("*", nbumberBeforeCal, enteredNumber);
-  writeLog('MULTIPLY',nbumberBeforeCal, enteredNumber,  currentResult);
+function multiply() {
+  calculateResult("MULTIPLY");
 }
 
 function divide() {
-  const enteredNumber = getUserInput();
-  const nbumberBeforeCal = currentResult;
-  currentResult /= enteredNumber;
-  writeResult("/", nbumberBeforeCal, enteredNumber);
-  writeLog('DIVIDE',nbumberBeforeCal, enteredNumber,  currentResult);
+  calculateResult("DIVIDE");
 }
 
 addBtn.addEventListener("click", add);
 subtractBtn.addEventListener("click", subtract);
-multiplyBtn.addEventListener("click", multiple);
+multiplyBtn.addEventListener("click", multiply);
 divideBtn.addEventListener("click", divide);
